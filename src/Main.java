@@ -14,7 +14,13 @@ public class Main extends Canvas implements Runnable{
 	 private int score = 0;
 	 private boolean running= true;
 	 
-    public void paint(Graphics g) {  
+    public void paint(Graphics g) {
+    	g.setColor(new Color(102,51,0));
+    	g.fillRect(0, 0, 1000, 1000);
+    	
+    	g.setColor(Color.GREEN);
+    	g.fillRect(50, 50, 875, 875);
+    	
         g.setColor(Color.blue);
         g.fillRect(snake.head_X(), snake.head_Y(), 24,24);
         g.setColor(Color.black);
@@ -73,7 +79,7 @@ public class Main extends Canvas implements Runnable{
         p.setFocusable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        f.setSize(993,990);  
+        f.setSize(993,1010);  
         //f.setLayout(null);  
         f.setVisible(true);  
         
@@ -137,7 +143,7 @@ public class Main extends Canvas implements Runnable{
     			running = false;
     		}
     	}
-    	if(snake.head_X()<0 || snake.head_X()>950 || snake.head_Y()<0 || snake.head_Y()>950) {
+    	if(snake.head_X()<50 || snake.head_X()>875 || snake.head_Y()<50 || snake.head_Y()>875) {
     		running = false;
     	}
     }
