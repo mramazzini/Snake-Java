@@ -13,6 +13,7 @@ public class Snake {
         bodyLocation_X = new int[] {head_x+1, head_x+2, head_x+3};
         bodyLocation_Y = new int[] {head_y, head_y, head_y};
         direction = "north";
+        System.out.print("allo");
     }
     
     public void setDirection(String dir) {
