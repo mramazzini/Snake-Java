@@ -21,19 +21,19 @@ public class Main extends Canvas implements Runnable{
     	g.setColor(Color.GREEN);
     	g.fillRect(50, 50, 875, 875);
     	
-        g.setColor(Color.blue);
-        g.fillRect(snake.head_X(), snake.head_Y(), 24,24);
+        
         g.setColor(Color.black);
         for(int i=1; i<snake.bodyLength(); i++) {
         	g.fillRect(snake.bodyCoordinates_X()[i]*25, snake.bodyCoordinates_Y()[i]*25, 24, 24);
         }
+        g.setColor(Color.blue);
+        g.fillRect(snake.head_X(), snake.head_Y(), 24,24);
         g.setColor(Color.red);
         g.fillRect(apple.getX(), apple.getY(),24,24);
         
         
         
-        System.out.println((snake.head_X()) + "shx");
-        System.out.println((snake.head_Y()) + "shy");
+        
     }
     
     public Main() {
@@ -43,18 +43,28 @@ public class Main extends Canvas implements Runnable{
             public void keyPressed(KeyEvent e) {
                 char k = e.getKeyChar();
                 
-                if(k=='w' && !snake.direction().equals("south")){
+                if(k=='w' && !snake.direction().equals("south") && !snake.decidedToMove()){
             
                     snake.setDirection("north");
+                    snake.decideToMove(true);
                 }
-                if(k=='s' && !snake.direction().equals("north")){
+                if(k=='s' && !snake.direction().equals("north") && !snake.decidedToMove()){
                     snake.setDirection("south");
+                    snake.decideToMove(true);
                 }
-                if(k=='a' && !snake.direction().equals("east")){
+                if(k=='a' && !snake.direction().equals("east") && !snake.decidedToMove()){
                     snake.setDirection("west");
+                    snake.decideToMove(true);
                 }
-                if(k=='d' && !snake.direction().equals("west")){
+                if(k=='d' && !snake.direction().equals("west") && !snake.decidedToMove()){
                     snake.setDirection("east");
+                    snake.decideToMove(true);
+                }
+                if(e.getKeyCode() == 1 && running == false) {
+                	running = true;
+                	score = 0;
+                	snake = new Snake();
+                	
                 }
 
             }
@@ -143,7 +153,7 @@ public class Main extends Canvas implements Runnable{
     			running = false;
     		}
     	}
-    	if(snake.head_X()<50 || snake.head_X()>875 || snake.head_Y()<50 || snake.head_Y()>875) {
+    	if(snake.head_X()<50 || snake.head_X()>900 || snake.head_Y()<50 || snake.head_Y()>900) {
     		running = false;
     	}
     }
@@ -152,14 +162,14 @@ public class Main extends Canvas implements Runnable{
     public void run()
     {
         try {
-            while(running == true){
-            	
+            while(true){
+            	if(running == true) {
                 Thread.sleep(100);
                 updateSnake();
                 checkCollision();
                 repaint();
-                
-                
+            	}
+            	snake.decideToMove(false);
             }
         }
         catch(InternalError | InterruptedException i1){

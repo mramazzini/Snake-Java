@@ -5,6 +5,7 @@ public class Snake {
     private String direction;
     private int[] bodyLocation_X;
     private int[] bodyLocation_Y;
+    private boolean decided_to_move;
 
 
     public Snake(){
@@ -13,11 +14,17 @@ public class Snake {
         bodyLocation_X = new int[] {head_x+1, head_x+2, head_x+3};
         bodyLocation_Y = new int[] {head_y, head_y, head_y};
         direction = "north";
-        System.out.print("allo");
+        decided_to_move = false;
     }
     
     public void setDirection(String dir) {
     	direction=dir;
+    }
+    public boolean decidedToMove() {
+    	return decided_to_move;
+    }
+    public void decideToMove(boolean b) {
+    	decided_to_move = b;
     }
 
     public int head_X(){

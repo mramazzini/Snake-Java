@@ -19,9 +19,9 @@ public class Apple {
 		return y*25;
 	}
 	public void moveApple() {
-		x = (int) Math.floor(Math.random()*35);
-		y = (int) Math.floor(Math.random()*35);
-		System.out.println(x);
-		System.out.println(y);
+		x = (int) Math.floor(Math.random()*34)+2;
+		y = (int) Math.floor(Math.random()*34)+2;
+		System.out.println("{" + x + "," + y + ")");
+
 	}
 }
