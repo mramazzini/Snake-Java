@@ -15,23 +15,40 @@ public class Main extends Canvas implements Runnable{
 	 private boolean running= true;
 	 
     public void paint(Graphics g) {
+    	
+    	
+    	//Draw Brown Backdrop
     	g.setColor(new Color(102,51,0));
     	g.fillRect(0, 0, 1000, 1000);
     	
-    	g.setColor(Color.GREEN);
-    	g.fillRect(50, 50, 875, 875);
     	
-        
+    	//Draw field
+    	for(int i=0; i<17; i++) {
+        	
+        	if(i%2==0) {
+        		g.setColor(new Color(0,102,0));
+        	}
+        	else {
+        		g.setColor(new Color(0,150,0));
+        	}
+        	g.fillRect(50, 50+(i*50), 875, 100+(i*50));
+        }
+
+    	//Draw Snake Body
         g.setColor(Color.black);
         for(int i=1; i<snake.bodyLength(); i++) {
         	g.fillRect(snake.bodyCoordinates_X()[i]*25, snake.bodyCoordinates_Y()[i]*25, 24, 24);
         }
+        //Draw Snake HEad
         g.setColor(Color.blue);
         g.fillRect(snake.head_X(), snake.head_Y(), 24,24);
+        
+        //Draw Apple
         g.setColor(Color.red);
         g.fillRect(apple.getX(), apple.getY(),24,24);
         
-        
+        g.setColor(new Color(102,51,0));
+    	g.fillRect(0, 900, 1000, 1000);
         
         
     }
@@ -83,7 +100,7 @@ public class Main extends Canvas implements Runnable{
         JFrame f=new JFrame();
         JPanel p = new JPanel();
         f.addKeyListener(listener);
-        
+        f.setResizable(false);
         f.add(p);
         f.add(this);
         p.setFocusable(false);
@@ -164,7 +181,7 @@ public class Main extends Canvas implements Runnable{
         try {
             while(true){
             	if(running == true) {
-                Thread.sleep(100);
+                Thread.sleep(50);
                 updateSnake();
                 checkCollision();
                 repaint();
